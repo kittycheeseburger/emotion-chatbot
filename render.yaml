@@ -1,10 +1,9 @@
 services:
   - type: web
     name: emotion-chatbot
-    runtime: python
+    runtime: docker
     plan: free
-    buildCommand: pip install -r backend/requirements.deploy.txt && cd frontend && npm ci && npm run build
-    startCommand: cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    dockerfilePath: ./Dockerfile
     healthCheckPath: /api/health
     envVars:
       - key: APP_ENV
